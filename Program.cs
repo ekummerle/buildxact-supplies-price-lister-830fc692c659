@@ -1,5 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using buildxact_supplies;
+using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace SuppliesPriceLister
@@ -24,6 +26,10 @@ namespace SuppliesPriceLister
             {
                 Console.WriteLine("The exchange rate defined in the app settings file is invalid.");
             }
+
+            var section = config.GetSection("loaders");
+
+            var loaders = section.Get<List<LoaderConfig>>();
         }
     }
 }

@@ -7,6 +7,10 @@ namespace buildxact_supplies
     /// </summary>
     public class PriceLister
     {
+        #region Variables
+
+        #endregion
+
         #region Properties
 
         /// <summary>
