@@ -1,4 +1,6 @@
-﻿namespace buildxact_supplies
+﻿using System.Collections.Generic;
+
+namespace buildxact_supplies
 {
     /// <summary>
     /// An interface for loading prices.
@@ -10,7 +12,7 @@
         /// <summary>
         /// A function to load the prices from file.
         /// </summary>
-        void LoadPrices();
+        List<PriceItem> LoadPrices();
 
         #endregion
     }
