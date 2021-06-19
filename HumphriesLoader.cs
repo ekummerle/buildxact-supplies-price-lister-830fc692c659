@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using CsvHelper;
+using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 
 namespace SuppliesPriceLister
@@ -33,9 +35,24 @@ namespace SuppliesPriceLister
 
             using Stream stream = GetType().Assembly.
                        GetManifestResourceStream($"SuppliesPriceLister.{filename}");
-            using StreamReader sr = new StreamReader(stream);
+            using TextReader textReader = new StreamReader(stream);
 
-            
+            using var csvReader = new CsvReader(textReader, CultureInfo.InvariantCulture);
+
+            csvReader.Read();
+            csvReader.ReadHeader();
+
+            while (csvReader.Read())
+            {
+                var record = new PriceItem
+                {
+                    ID = csvReader.GetField<string>("identifier"),
+                    Name = csvReader.GetField<string>("desc"),
+                    Price = csvReader.GetField<decimal>("costAUD")
+                };
+
+                results.Add(record);
+            }
 
             // Return the results.
             return results;

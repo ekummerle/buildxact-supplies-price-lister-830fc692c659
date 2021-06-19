@@ -33,6 +33,11 @@ namespace SuppliesPriceLister
             var lister = new PriceLister(loaders, exchangeRate);
 
             lister.LoadPriceItems();
+
+            foreach (var item in lister.Items)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
 }

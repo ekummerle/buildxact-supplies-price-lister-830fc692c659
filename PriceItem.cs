@@ -23,5 +23,18 @@
         public decimal Price { get; set; }
 
         #endregion
+
+        #region Functions
+
+        /// <summary>
+        /// Override the ToString method.
+        /// </summary>
+        /// <returns>The string to use for displaying the data.</returns>
+        public override string ToString()
+        {
+            return $"{ID}, {Name}, ${Price:2F}";
+        }
+
+        #endregion
     }
 }

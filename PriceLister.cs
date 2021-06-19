@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SuppliesPriceLister
@@ -54,31 +55,38 @@ namespace SuppliesPriceLister
         /// <returns></returns>
         public void LoadPriceItems()
         {
-            // Loop through all the loader configs.
-            foreach (var config in loaderConfigs)
+            try
             {
-                IPriceLoader loader = null;
-                
-                // Create the loader.
-                switch (config.loader)
+                // Loop through all the loader configs.
+                foreach (var config in loaderConfigs)
                 {
-                    case "HumphriesLoader":
-                        loader = new HumphriesLoader(config.filename);
-                        break;
-                    case "MegaCorpLoader":
-                        loader = new MegaCorpLoader(exchangeRate, config.filename);
-                        break;
+                    IPriceLoader loader = null;
+
+                    // Create the loader.
+                    switch (config.loader)
+                    {
+                        case "HumphriesLoader":
+                            loader = new HumphriesLoader(config.filename);
+                            break;
+                        case "MegaCorpLoader":
+                            loader = new MegaCorpLoader(exchangeRate, config.filename);
+                            break;
+                    }
+
+                    // If the loader has a value, load the prices and add them to the list.
+                    if (loader != null)
+                    {
+                        Items.AddRange(loader.LoadPrices());
+                    }
                 }
 
-                // If the loader has a value, load the prices and add them to the list.
-                if (loader != null)
-                {
-                    Items.AddRange(loader.LoadPrices());
-                }
+                // Order the list by price descending, i.e. high to low.
+                Items = Items.OrderByDescending(i => i.Price).ToList();
             }
-
-            // Order the list by price descending, i.e. high to low.
-            Items = Items.OrderByDescending(i => i.Price).ToList();
+            catch (Exception e)
+            {
+                Console.WriteLine($"Unable to load data: {e.Message}");
+            }
         }
 
         #endregion
