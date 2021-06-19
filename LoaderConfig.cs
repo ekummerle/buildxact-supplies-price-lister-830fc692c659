@@ -1,4 +1,4 @@
-﻿namespace buildxact_supplies
+﻿namespace SuppliesPriceLister
 {
     /// <summary>
     /// A class to handle the loader config section.

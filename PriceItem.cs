@@ -1,4 +1,4 @@
-﻿namespace buildxact_supplies
+﻿namespace SuppliesPriceLister
 {
     /// <summary>
     /// A class for handling prices.

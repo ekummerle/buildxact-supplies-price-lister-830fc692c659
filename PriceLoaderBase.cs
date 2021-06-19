@@ -1,4 +1,4 @@
-﻿namespace buildxact_supplies
+﻿namespace SuppliesPriceLister
 {
     /// <summary>
     /// The base class for all price loaders.

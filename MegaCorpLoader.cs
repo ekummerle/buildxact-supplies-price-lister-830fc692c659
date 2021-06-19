@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace buildxact_supplies
+namespace SuppliesPriceLister
 {
     /// <summary>
     /// A class to handling loading a MageCorp file.

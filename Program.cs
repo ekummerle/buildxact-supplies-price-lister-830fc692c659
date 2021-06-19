@@ -1,5 +1,4 @@
-﻿using buildxact_supplies;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,6 +29,10 @@ namespace SuppliesPriceLister
             var section = config.GetSection("loaders");
 
             var loaders = section.Get<List<LoaderConfig>>();
+
+            var lister = new PriceLister(loaders, exchangeRate);
+
+            lister.LoadPriceItems();
         }
     }
 }

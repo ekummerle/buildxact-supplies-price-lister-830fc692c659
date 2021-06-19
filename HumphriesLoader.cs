@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace buildxact_supplies
+namespace SuppliesPriceLister
 {
     /// <summary>
     /// A class to handle loading a Humphries file.
@@ -30,6 +30,12 @@ namespace buildxact_supplies
         {
             // Set up the default results.
             var results = new List<PriceItem>();
+
+            using Stream stream = GetType().Assembly.
+                       GetManifestResourceStream($"SuppliesPriceLister.{filename}");
+            using StreamReader sr = new StreamReader(stream);
+
+            
 
             // Return the results.
             return results;

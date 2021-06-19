@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace buildxact_supplies
+namespace SuppliesPriceLister
 {
     /// <summary>
     /// An interface for loading prices.

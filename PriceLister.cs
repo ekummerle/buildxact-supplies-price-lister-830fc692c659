@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace buildxact_supplies
+namespace SuppliesPriceLister
 {
     /// <summary>
     /// A class to handle listing 
