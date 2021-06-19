@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using System.IO;
 
 namespace SuppliesPriceLister
 {
@@ -39,6 +42,30 @@ namespace SuppliesPriceLister
         {
             // Set up the default results.
             var results = new List<PriceItem>();
+
+            using Stream stream = GetType().Assembly.
+                       GetManifestResourceStream($"SuppliesPriceLister.{filename}");
+            using StreamReader sr = new StreamReader(stream);
+
+            using (JsonTextReader reader = new JsonTextReader(sr))
+            {
+                JObject o2 = (JObject)JToken.ReadFrom(reader);
+
+                foreach (var partner in o2["partners"])
+                {
+                    foreach (var record in partner["supplies"])
+                    {
+                        var item = new PriceItem
+                        {
+                            ID = record["id"].ToString(),
+                            Name = record["description"].ToString(),
+                            Price = decimal.Parse(record["priceInCents"].ToString())
+                        };
+
+                        results.Add(item);
+                    }
+                }
+            }
 
             // Return the results.
             return results;
